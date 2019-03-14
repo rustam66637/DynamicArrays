@@ -1,7 +1,7 @@
 import ctypes
 
 class DynArray:
-    
+
     def __init__(self):
         self.count = 0
         self.capacity = 16
@@ -32,7 +32,30 @@ class DynArray:
         self.count += 1
 
     def insert(self, i, itm):
-        # добавляем объект itm в позицию i, начиная с 0
+        self.__getitem__(i)
+        if i == self.count:
+            self.append(itm)
+            return
+        z = self.count + 1
+        if z >= self.capacity:
+            self.resize(2*self.capacity)
+        j = self.count - 1
+        while j >= i:
+            self.array[j+1] = self.array[j]
+            j -= 1
+        self.array[i] = itm
+        self.count += 1
 
     def delete(self, i):
-        # удаляем объект в позиции i
+        self.__getitem__(i)
+        j = self.count - 1
+        while i < j:
+            self.array[i] = self.array[i+1]
+            i += 1
+        self.count -= 1
+        while True:
+            if self.count >= 16 and (self.capacity * 0.5) > self.count:
+                self.resize(int(self.capacity // 1.5))
+                if self.capacity < 16:
+                    self.resize(16)
+            else: return
