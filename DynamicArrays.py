@@ -32,6 +32,8 @@ class DynArray:
         self.count += 1
 
     def insert(self, i, itm):
+        if i > self.count or i < 0:
+            self.__getitem__(i)
         if i == self.count:
             self.append(itm)
             return
@@ -46,6 +48,8 @@ class DynArray:
         self.count += 1
 
     def delete(self, i):
+        if i > self.count or i < 0:
+            self.__getitem__(i)
         j = self.count - 1
         while i < j:
             self.array[i] = self.array[i+1]
