@@ -49,7 +49,7 @@ class DynArray:
 
     def delete(self, i):
         if i > self.count or i < 0:
-            self.__getitem__(i)
+            raise IndexError('Index is out of bounds')
         j = self.count - 1
         while i < j:
             self.array[i] = self.array[i+1]
