@@ -48,7 +48,7 @@ class DynArray:
         self.count += 1
 
     def delete(self, i):
-        if i > self.count or i <= 0:
+        if i > self.count or i < 0 or self.count=0:
             raise IndexError('Index is out of bounds')
         j = self.count - 1
         while i < j:
